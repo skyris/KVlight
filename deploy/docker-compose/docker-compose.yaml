@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  server:
+    container_name: server
+    build:
+      context: ${PWD}
+      dockerfile: deploy/dockerfiles/server/Dockerfile.${STAGE:-dev}
+      args:
+        PORT: ${PORT}
+    env_file:
+      - ${PWD}/configs/server/.env.${STAGE:-dev}
+    ports:
+      - 8080:${PORT}
