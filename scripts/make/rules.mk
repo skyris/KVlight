@@ -26,6 +26,12 @@ config:
 	@docker compose config
 .PHONY: config
 
+
+## run: go run app.go
+run:
+	@PORT=8080 go run ./cmd/server/main.go
+.PHONY: local-up
+
 ## up: docker compose up
 up:
 	@docker compose up --build -d
