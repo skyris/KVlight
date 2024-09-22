@@ -8,16 +8,19 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Setup Go 1.23.x
+    - uses: actions/checkout@v4
+
+    - name: Setup Go
       uses: actions/setup-go@v5
       with:
-        go-version: '1.23.x'
+        go-version-file: go.mod
 
-    - name: Test with the Go CLI
-      run: go test ./...
+    - name: Test
+      uses: robherley/go-test-action@v0
 
   lint:
     if: github.event_name == 'pull_request'
