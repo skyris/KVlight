@@ -1,9 +1,20 @@
 package main
 
 import (
-	"github.com/skyris/KVlight/internal/code"
+	"context"
+
+	"github.com/skyris/KVlight/internal/compute"
+	"github.com/skyris/KVlight/internal/database"
+	"github.com/skyris/KVlight/internal/delivery"
+	"github.com/skyris/KVlight/internal/storage"
 )
 
 func main() {
-	code.Run()
+	ctx := context.Background()
+	db := database.NewDataBase(
+		compute.NewCompute(),
+		storage.NewSimpleStore(),
+		delivery.Default(),
+	)
+	db.Run(ctx)
 }
